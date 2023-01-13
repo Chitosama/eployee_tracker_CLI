@@ -1,0 +1,9 @@
+# ignore Marvel
+
+*/connection
+
+# Examples
+# api*.js
+# *marvel.js
+# */Assests/
+# api_marvel.js
