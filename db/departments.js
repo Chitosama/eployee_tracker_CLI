@@ -29,4 +29,4 @@ async function addDepartment() {
     }
 }
 
-module.exports{viewAllDepartments, addDepartment};
+module.exports = {viewAllDepartments, addDepartment};
