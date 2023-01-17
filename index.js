@@ -1,1 +1,25 @@
 const {prompt} = require('inquirer');
+const db = require('./db/connection');
+const viewAllDepartments = require('./db/departments');
+const viewAllEmployees = require('./db/employees');
+const viewAllRoles = require('./db/roles');
+
+const start = async (s) => {
+    //used to make sure we are running and user friendly
+    if (s) console.log('How can we assist with Employee Management today?');
+
+    //Run set of options used to create and manage employees
+    const {options}= await prompt([{
+        type:'list',
+        name:'choice',
+        message:'Please select from opitons available',
+        choices:[
+            'View all departments',
+            'View all employees',
+            'view all roles',
+            'Exit'
+        ]
+}])
+
+
+}
