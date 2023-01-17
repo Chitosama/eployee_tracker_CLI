@@ -1,9 +1,9 @@
 const {prompt} = require('inquirer');
 const { default: Choice } = require('inquirer/lib/objects/choice');
 const db = require('./db/connection');
-const viewAllDepartments = require('./db/departments');
-const viewAllEmployees = require('./db/employees');
-const viewAllRoles = require('./db/roles');
+const {viewAllDepartments, addDepartment} = require('./db/departments');
+const {viewAllEmployees, addEmployee} = require('./db/employees');
+const {viewAllRoles, addRole} = require('./db/roles');
 
 const start = async (s) => {
     //used to make sure we are running and user friendly
@@ -18,6 +18,9 @@ const start = async (s) => {
             'View all departments',
             'View all employees',
             'view all roles',
+            'Add department',
+            'Add employee',
+            'Add role',
             'Exit'
         ]
 }]);
@@ -31,9 +34,20 @@ switch(Choice){
         const employees = await viewAllEmployees();
         console.table(employees);
         break;
-    case 'view all roles':
+    case 'View all roles':
         const roles = await viewAllRoles();
         console.table(roles);
+        break;
+    case 'Add department':
+        const newDepartment = await addDepartment();
+        console.table(newDepartment);
+        break;
+    case 'Add employee':
+        const newEmployee = await addEmployee();
+        console.table(newEmployee)
+        break;
+    case 'Add role':
+        const newRole = await addRole;
         break;
     case 'Exit':
         console.log('Thank you! Have a wonderful day!');
