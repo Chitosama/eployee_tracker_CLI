@@ -1,4 +1,5 @@
 const {prompt} = require('inquirer');
+const { default: Choice } = require('inquirer/lib/objects/choice');
 const db = require('./db/connection');
 const viewAllDepartments = require('./db/departments');
 const viewAllEmployees = require('./db/employees');
@@ -19,7 +20,28 @@ const start = async (s) => {
             'view all roles',
             'Exit'
         ]
-}])
+}]);
 
+switch(Choice){
+    case 'View all departments':
+        const departments = await viewAllDepartments();
+        console.table(departments);
+        break;
+    case 'View all employees':
+        const employees = await viewAllEmployees();
+        console.table(employees);
+        break;
+    case 'view all roles':
+        const roles = await viewAllRoles();
+        console.table(roles);
+        break;
+    case 'Exit':
+        console.log('Thank you! Have a wonderful day!');
+        process.exit();
 
 }
+
+start(false);
+};
+
+start (true);
