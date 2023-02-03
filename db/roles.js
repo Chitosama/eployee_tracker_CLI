@@ -4,7 +4,7 @@ const { viewAllDepartments } = require("./departments");
 
 async function viewAllRoles() {
   try {
-    const role = db.query("SELECT * FROM role");
+    const role = db.query("SELECT * FROM roles");
     return role;
   } catch (err) {
     console.log(err);
@@ -21,6 +21,12 @@ async function addRole() {
           message: 'Enter title',
         },
         {
+          type: "input",
+          name: "salary",
+          message: 'Enter salary',
+        }
+        ,
+        {
           type: "list",
           name: "department_id",
           message: 'Enter the department',
@@ -30,12 +36,7 @@ async function addRole() {
               value: department.id,
             };
           }),
-        },
-        {
-          type: "input",
-          name: "salary",
-          message: 'Enter salary',
-        },
+        }
       ]);
   
       await db.query(

@@ -1,5 +1,5 @@
 const {prompt} = require('inquirer');
-const { default: Choice } = require('inquirer/lib/objects/choice');
+//const { default: Choice } = require('inquirer/lib/objects/choice');
 const db = require('./db/connection');
 const {viewAllDepartments, addDepartment} = require('./db/departments');
 const {viewAllEmployees, addEmployee} = require('./db/employees');
@@ -10,9 +10,9 @@ const start = async (s) => {
     if (s) console.log('How can we assist with Employee Management today?');
 
     //Run set of options used to create and manage employees
-    const {options}= await prompt([{
+    const {choices}= await prompt([{
         type:'list',
-        name:'choice',
+        name:'choices',
         message:'Please select from opitons available',
         choices:[
             'View all departments',
@@ -25,7 +25,7 @@ const start = async (s) => {
         ]
 }]);
 
-switch(Choice){
+switch(choices){
     case 'View all departments':
         const departments = await viewAllDepartments();
         console.table(departments);
