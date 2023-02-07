@@ -80,5 +80,44 @@ async function addEmployee() {
     }
 }
 
-module.exports = { viewAllEmployees, addEmployee };
+async function updateEmployeeRole() {
+    try {
+        const employee = await viewAllEmployees();
+        const role = await viewAllRoles();
+        const { employeeId, roleId } = await inquirer.prompt([
+            {
+                type: "list",
+                name: "employeeId",
+                message: "Select employee to update",
+                choices: employee.map((employee) => {
+                    return {
+                        name: employee.first_name,
+                        value: employee.id,
+                    };
+                }),
+            },
+            {
+                type: "list",
+                name: "roleId",
+                message: "Select new role",
+                choices: role.map((role) => {
+                    return {
+                        name: role.title,
+                        value: role.id,
+                    };
+                }),
+            },
+        ]);
+        await db.query(
+            `UPDATE employees SET role_id = ${roleId} WHERE id = ${employeeId}`
+        );
+        const updatedEmployee = await viewAllEmployees();
+        return updatedEmployee;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+
+module.exports = { viewAllEmployees, addEmployee, updateEmployeeRole };
 
